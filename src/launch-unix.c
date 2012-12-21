@@ -36,6 +36,12 @@
 static int
 launch_unix (guestfs_h *g, const char *sockpath)
 {
+  error (g,
+	 "launch: In RHEL, only the 'libvirt' or 'appliance' method is supported.\n"
+	 "In particular, \"libguestfs live\" is not supported.");
+  return -1;
+
+#if 0
   int r;
   struct sockaddr_un addr;
   uint32_t size;
@@ -100,6 +106,7 @@ launch_unix (guestfs_h *g, const char *sockpath)
  cleanup:
   close (g->sock);
   return -1;
+#endif
 }
 
 static int
